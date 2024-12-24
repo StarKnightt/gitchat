@@ -1,6 +1,14 @@
+import { getServerSession } from "next-auth/next"
+import { redirect } from "next/navigation"
 import { LoginButton } from "@/components/login-button"
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await getServerSession()
+
+  if (session) {
+    redirect("/")
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">
       <div className="text-center">
